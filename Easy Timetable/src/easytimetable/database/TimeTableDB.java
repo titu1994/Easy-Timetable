@@ -14,7 +14,7 @@ public class TimeTableDB {
 	
 	private static TimeTable tt;
 
-	public static void storeTT(TimeTable tt) {
+	public static void storeTimeTable(TimeTable tt) {
 		TimeTableDB.tt = tt;
 		Gson g = new Gson();
 		File f = new File("db/TimeTable " + tt.year + ".txt");

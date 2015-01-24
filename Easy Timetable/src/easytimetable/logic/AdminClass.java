@@ -10,6 +10,8 @@ import easytimetable.database.SubjectDB;
 import easytimetable.database.SubjectData;
 import easytimetable.database.TeacherDB;
 import easytimetable.database.TeacherData;
+import easytimetable.database.TimeTable;
+import easytimetable.database.TimeTableDB;
 
 public class AdminClass {
 
@@ -19,6 +21,7 @@ public class AdminClass {
 	private ArrayList<SlotData> slotList;
 	
 	private int slotCount;
+	private int year;
 
 	public void addTeacher(String name, ArrayList<TeacherData> subs) {
 		SubjectData[] subjects = subs.toArray(new SubjectData[subs.size()]);
@@ -51,8 +54,12 @@ public class AdminClass {
 	public void deleteSubject(String name) {
 		SubjectDB.deleteSubject(name);
 	}
-
-	public void setBreakLimit(int... breaks) {
+	
+	
+	/**
+	 * Break list is added from GUI here
+	 */
+	public void setBreakList(int... breaks) {
 		breakList = breaks;
 	}
 
@@ -71,8 +78,18 @@ public class AdminClass {
 		SlotDB.storeSlot(slotList);
 	}
 	
+	/*
+	 * GUI calls this function to set the checked subjects from the checked list.
+	 */
 	public void setSubjectList(ArrayList<SubjectData> subs) {
 		this.subjectList = subs;
+	}
+	
+	/*
+	 * GUI sets the year in this function
+	 */
+	public void setYear(int year) {
+		this.year = year;
 	}
 	
 	public void setSlotCount(int slotCount) {
@@ -138,8 +155,8 @@ public class AdminClass {
 				slotList.add(sData);
 			}
 		}
-		
-		
+		TimeTable tt = new TimeTable(slotList, year);
+		TimeTableDB.storeTimeTable(tt);
 	}
 
 	private SlotData calculateSlot(int slotNo) {
