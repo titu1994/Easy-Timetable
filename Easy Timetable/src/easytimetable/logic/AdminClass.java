@@ -122,11 +122,14 @@ public class AdminClass {
 	 * Main functionality
 	 */
 	private void calculateTimeTable() {
+		SlotData sData = null;
 		for(int day = 0; day < 6; day++) {
 			for(int slot = 1; slot <= slotCount; slot++) {
 				
 			}
 		}
+		
+		
 	}
 
 } 

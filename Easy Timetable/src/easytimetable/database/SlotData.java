@@ -12,7 +12,8 @@ public class SlotData {
 	public SlotData(TeacherData[] teachers, SubjectData[] subs) {
 		this.teachers = teachers;
 		this.subs = subs;
-		this.no = count++;
+		this.no = (count % SlotDB.getSlotCount()) + 1;
+		count++;
 	}
 	
 	@Override
@@ -20,14 +21,5 @@ public class SlotData {
 		SlotData s = (SlotData) obj;
 		return teachers[0].tid == s.teachers[0].tid;
 	}
-
-	public boolean isBreak() {
-		return isBreak;
-	}
-
-	public void setBreak(boolean isBreak) {
-		this.isBreak = isBreak;
-	}
-
 	
 }
