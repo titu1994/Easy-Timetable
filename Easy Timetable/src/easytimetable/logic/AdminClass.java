@@ -19,7 +19,8 @@ public class AdminClass {
 	private ArrayList<TeacherData> teacherList;
 	private ArrayList<SubjectData> subjectList;
 	private ArrayList<SlotData> slotList;
-	
+    
+	private int x;
 	private int slotCount;
 	private int year;
 	private int maxTeacher;
@@ -55,8 +56,7 @@ public class AdminClass {
 	public void deleteSubject(String name) {
 		SubjectDB.deleteSubject(name);
 	}
-	
-	
+
 	/**
 	 * Break list is added from GUI here
 	 */
@@ -69,37 +69,38 @@ public class AdminClass {
 	 */
 	public void createTimeTable() {
 		teacherList = TeacherDB.getTeacherData();
-		
+
 		slotList = SlotDB.getSlotData();
 		slotList.clear();
 		slotCount = SlotDB.getSlotCount();
 
 		calculateTimeTable();
-		
+
 		SlotDB.storeSlot(slotList);
 	}
-	
+
 	/*
-	 * GUI calls this function to set the checked subjects from the checked list.
+	 * GUI calls this function to set the checked subjects from the checked
+	 * list.
 	 */
 	public void setSubjectList(ArrayList<SubjectData> subs) {
 		this.subjectList = subs;
 	}
-	
+
 	/*
 	 * GUI sets the year in this function
 	 */
 	public void setYear(int year) {
 		this.year = year;
 	}
-	
+
 	/*
 	 * GUI sets the max no of teachers in a room at a time.
 	 */
 	public void setMaxNoOfTeachersInClassRoom(int maxTeacher) {
 		this.maxTeacher = maxTeacher;
 	}
-	
+
 	public void setSlotCount(int slotCount) {
 		this.slotCount = slotCount;
 		SlotDB.storeSlotCount(slotCount);
@@ -107,7 +108,7 @@ public class AdminClass {
 
 	public boolean isTeacherAvailable(SlotData data) {
 		boolean test = true;
-		for(TeacherData t : data.teachers) {
+		for (TeacherData t : data.teachers) {
 			test = test & t.isAvailable;
 		}
 		return test;
@@ -115,21 +116,21 @@ public class AdminClass {
 
 	public boolean isSubjectAvailable(SlotData data) {
 		boolean test = true;
-		for(SubjectData s : data.subs) {
+		for (SubjectData s : data.subs) {
 			test = test & s.isAvailable;
 		}
 		return test;
 	}
 
 	public boolean isSlotBreak(int no) {
-		for(int x : breakList) {
-			if(x == no) {
+		for (int x : breakList) {
+			if (x == no) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
+
 	public void setSchoolName(String name) {
 		SlotDB.storeSchoolName(name);
 	}
@@ -142,24 +143,24 @@ public class AdminClass {
 	 * Checks if the slot is available
 	 */
 	public boolean isSlotAvailable(SlotData slot) {
-		return isTeacherAvailable(slot) & isSubjectAvailable(slot) && !isSlotBreak(slot.no);
+		return isTeacherAvailable(slot) & isSubjectAvailable(slot)
+				&& !isSlotBreak(slot.no);
 	}
-	
+
 	/*
 	 * Main functionality
 	 */
 	private void calculateTimeTable() {
 		SlotData sData = null;
-		for(int day = 0; day < 6; day++) {
-			for(int slot = 1; slot <= slotCount; slot++) {
-				if(isSlotBreak(slot)) {
-					sData = new SlotData(null,  null);
+		for (int day = 0; day < 5; day++) {
+			for (int slot = 1; slot <= slotCount; slot++) {
+				if (isSlotBreak(slot)) {
+					sData = new SlotData(null, null);
 					sData.isBreak = true;
-				}
-				else {
+				} else {
 					sData = calculateSlot(slot);
 				}
-				
+
 				slotList.add(sData);
 			}
 		}
@@ -170,11 +171,36 @@ public class AdminClass {
 	private SlotData calculateSlot(int slotNo) {
 		TeacherData teachers[] = new TeacherData[maxTeacher];
 		SubjectData subs[] = subjectList.toArray(new SubjectData[subjectList.size()]);
+		ArrayList<TeacherData> al;
+		SlotData soda;
+		SubjectData[] subby = new SubjectData[maxTeacher];
 		
-		for(int i = 0; i < maxTeacher; i++) {
-			
+		for (int i = 0; i < maxTeacher; i++) {
+
+			al = TeacherDB.getTeachersWhoTeachSubject(teacherList, subs[x]);
+
+			if (al.size() == 0) {
+				// Alert via GUI that teachers unavailable
+			}
+
+			for (TeacherData t : al) {
+				if (t.isAvailable == true) {
+					teachers[i] = t;
+					TeacherDB.availableChange(t, false);
+					break;
+				}
+
+			}
+
+			x = (x + 1) % subs.length;
 		}
-		return null;
+		
+		
+		System.arraycopy(subs, x, subby, 0, maxTeacher);
+		soda = new SlotData(teachers, subby);
+		
+		
+		return soda;
 	}
 
-} 
+}

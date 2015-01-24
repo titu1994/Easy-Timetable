@@ -159,6 +159,13 @@ public class TeacherDB {
 		}
 	}
 	
+	public static void availableChange(TeacherData t, boolean b) {
+		t.isAvailable = b;
+		list.remove(t);
+		list.add(t);
+		storeTeacherData(list);
+	}
+	
 	public static void updateTeacher(TeacherData t) {
 		list.remove(t);
 		list.add(t);
