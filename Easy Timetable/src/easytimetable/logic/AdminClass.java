@@ -168,7 +168,12 @@ public class AdminClass {
 	}
 
 	private SlotData calculateSlot(int slotNo) {
+		TeacherData teachers[] = new TeacherData[maxTeacher];
+		SubjectData subs[] = subjectList.toArray(new SubjectData[subjectList.size()]);
 		
+		for(int i = 0; i < maxTeacher; i++) {
+			
+		}
 		return null;
 	}
 
