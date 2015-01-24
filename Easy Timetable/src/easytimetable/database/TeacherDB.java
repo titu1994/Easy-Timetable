@@ -8,9 +8,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import javax.security.auth.Subject;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

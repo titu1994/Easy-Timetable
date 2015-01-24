@@ -17,7 +17,7 @@ public class TimeTableDB {
 	public static void storeTimeTable(TimeTable tt) {
 		TimeTableDB.tt = tt;
 		Gson g = new Gson();
-		File f = new File("db/TimeTable " + tt.year + ".txt");
+		File f = new File("db/TimeTable " + tt.year + "" + tt.division + ".txt");
 		f.mkdirs();
 
 		if(!f.exists()) {

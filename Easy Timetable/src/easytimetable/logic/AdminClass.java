@@ -24,6 +24,7 @@ public class AdminClass {
 	private int slotCount;
 	private int year;
 	private int maxTeacher;
+	private int division;
 
 	public void addTeacher(String name, ArrayList<TeacherData> subs) {
 		SubjectData[] subjects = subs.toArray(new SubjectData[subs.size()]);
@@ -100,6 +101,13 @@ public class AdminClass {
 	public void setMaxNoOfTeachersInClassRoom(int maxTeacher) {
 		this.maxTeacher = maxTeacher;
 	}
+	
+	/*
+	 * GUI sets the division
+	 */
+	public void setDivisin(int division) {
+		this.division = division;
+	}
 
 	public void setSlotCount(int slotCount) {
 		this.slotCount = slotCount;
@@ -164,7 +172,7 @@ public class AdminClass {
 				slotList.add(sData);
 			}
 		}
-		TimeTable tt = new TimeTable(slotList, maxTeacher, year, slotCount);
+		TimeTable tt = new TimeTable(slotList, maxTeacher, year, slotCount, division);
 		TimeTableDB.storeTimeTable(tt);
 	}
 
