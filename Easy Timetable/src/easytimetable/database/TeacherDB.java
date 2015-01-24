@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -19,12 +20,73 @@ public class TeacherDB {
 	public TeacherDB() {
 		list = new ArrayList<>();
 	}
-
-	public void storeTeacherData(ArrayList<TeacherData> list) {
+	
+	public static int getID() {
+		File f = new File("db/ID.txt");
+		if(!f.exists()) {
+			try {
+				f.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		int data = 0;
+		BufferedReader bb;
+		try {
+			bb = new BufferedReader(new FileReader(f));
+			data = Integer.parseInt(bb.readLine());
+			bb.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return data;
+	}
+	
+	public static void setID() {
+		File f = new File("db/ID.txt");
+		if(!f.exists()) {
+			try {
+				f.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			f.delete();
+			try {
+				f.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		int id = TeacherData.getId();
+		try {
+			PrintWriter pw = new PrintWriter(new FileWriter(f), true);
+			pw.println(id);
+			pw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void storeTeacherData(ArrayList<TeacherData> list) {
 		TeacherDB.list = list;
 		Gson g = new Gson();
 		File f = new File("db/TeacherDB.txt");
 		if(!f.exists()) {
+			try {
+				f.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			f.delete();
 			try {
 				f.createNewFile();
 			} catch (IOException e) {
@@ -40,16 +102,18 @@ public class TeacherDB {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		setID();
 	}
 
-	public void addTeacher(TeacherData t) {
+	public static void addTeacher(TeacherData t) {
 		if(!list.contains(t)) {
 			list.add(t);
 			storeTeacherData(list);
 		}
 	}
 
-	public ArrayList<TeacherData> getTeacherData() {
+	public static ArrayList<TeacherData> getTeacherData() {
 		Gson g = new Gson();
 		File f = new File("db/TeacherDB.txt");
 		String data = "";
@@ -66,10 +130,30 @@ public class TeacherDB {
 		}
 		
 		list = g.fromJson(data, new TypeToken<ArrayList<TeacherData>>(){}.getType());
+		
+		int id = getID();
+		TeacherData.setId(id);
 		return list;
 	}
-
-	public void updateTeacher(TeacherData t) {
+	
+	public static TeacherData getTeacherData(int id) {
+		for(TeacherData t : list) {
+			if(t.tid == id) 
+				return t;
+		}
+		return null;
+	}
+	
+	public static void deleteTeacher(int id) {
+		for(TeacherData t : list) {
+			if(t.tid == id) {
+				list.remove(t);
+				storeTeacherData(list);
+			}
+		}
+	}
+	
+	public static void updateTeacher(TeacherData t) {
 		list.remove(t);
 		list.add(t);
 		storeTeacherData(list);

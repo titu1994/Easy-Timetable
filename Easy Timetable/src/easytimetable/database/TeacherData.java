@@ -8,13 +8,22 @@ public class TeacherData {
 	private static int id = 1;
 	public int tid;
 	public final String name;
-	public final Subject[] subjects;
+	public Subject[] subjects;
 	public boolean isAvailable = true;
 	
 	public TeacherData(String name, Subject[] subjects) {
 		this.tid = id++;
 		this.name = name;
 		this.subjects = subjects;
+	}
+
+
+	public static void setId(int id) {
+		TeacherData.id = id;
+	}
+
+	public static int getId() {
+		return id;
 	}
 
 	@Override
@@ -30,7 +39,5 @@ public class TeacherData {
 	public void setAvailable(boolean isAvailable) {
 		this.isAvailable = isAvailable;
 	}
-	
-	
-	
+
 }

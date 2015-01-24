@@ -9,23 +9,21 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import javax.rmi.CORBA.Stub;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-public class SubjectDB {
+public class SlotDB {
+
+	private static ArrayList<SlotData> list;
 	
-	private static ArrayList<SubjectData> list;
-	
-	public SubjectDB() {
+	public SlotDB() {
 		list = new ArrayList<>();
 	}
 	
-	public static void storeSubjectsData(ArrayList<SubjectData> list) {
-		SubjectDB.list = list;
+	public static void storeSlot(ArrayList<SlotData> list) {
+		SlotDB.list = list;
 		Gson g = new Gson();
-		File f = new File("db/subjectDB.txt");
+		File f = new File("db/Timetable.txt");
 		if(!f.exists()) {
 			try {
 				f.createNewFile();
@@ -38,7 +36,6 @@ public class SubjectDB {
 			try {
 				f.createNewFile();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -52,17 +49,10 @@ public class SubjectDB {
 			e.printStackTrace();
 		}
 	}
-
-	public static void addSubject(SubjectData t) {
-		if(!list.contains(t)) {
-			list.add(t);
-			storeSubjectsData(list);
-		}
-	}
-
-	public static ArrayList<SubjectData> getSubjectData() {
+	
+	public static ArrayList<SlotData> getSlotData() {
 		Gson g = new Gson();
-		File f = new File("db/subjectDB.txt");
+		File f = new File("db/Timetable.txt");
 		String data = "";
 
 		BufferedReader bb;
@@ -76,31 +66,38 @@ public class SubjectDB {
 			e.printStackTrace();
 		}
 		
-		list = g.fromJson(data, new TypeToken<ArrayList<SubjectData>>(){}.getType());
+		list = g.fromJson(data, new TypeToken<ArrayList<SlotData>>(){}.getType());
 		return list;
 	}
-
-	public static void updateSubject(SubjectData t) {
-		list.remove(t);
-		list.add(t);
-		storeSubjectsData(list);
-	}
 	
-	public static void deleteSubject(String name) {
-		for(SubjectData t : list) {
-			if(t.name.equalsIgnoreCase(name)) {
-				list.remove(t);
-				storeSubjectsData(list);
-			}
+	public static void addSlot(SlotData t) {
+		if(!list.contains(t)) {
+			list.add(t);
+			storeSlot(list);
 		}
 	}
 	
-	public static SubjectData getTeacherData(String name) {
-		for(SubjectData t : list) {
-			if(t.name.equalsIgnoreCase(name)) 
+	public static SlotData getSlotData(int no) {
+		for(SlotData t : list) {
+			if(t.no == no) 
 				return t;
 		}
 		return null;
 	}
-
+	
+	public static void deleteSlot(int no) {
+		for(SlotData t : list) {
+			if(t.no == no) {
+				list.remove(t);
+				storeSlot(list);
+			}	
+		}
+	}
+	
+	public static void updateSlot(SlotData t) {
+		list.remove(t);
+		list.add(t);
+		storeSlot(list);
+	}
+	
 }
