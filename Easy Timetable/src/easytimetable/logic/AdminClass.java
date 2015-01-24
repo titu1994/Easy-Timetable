@@ -61,7 +61,6 @@ public class AdminClass {
 	 */
 	public void createTimeTable() {
 		teacherList = TeacherDB.getTeacherData();
-		subjectList = SubjectDB.getSubjectData();
 		
 		slotList = SlotDB.getSlotData();
 		slotList.clear();
@@ -70,6 +69,10 @@ public class AdminClass {
 		calculateTimeTable();
 		
 		SlotDB.storeSlot(slotList);
+	}
+	
+	public void setSubjectList(ArrayList<SubjectData> subs) {
+		this.subjectList = subs;
 	}
 	
 	public void setSlotCount(int slotCount) {
