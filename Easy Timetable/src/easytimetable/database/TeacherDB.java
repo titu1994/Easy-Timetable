@@ -23,6 +23,7 @@ public class TeacherDB {
 	
 	public static int getID() {
 		File f = new File("db/ID.txt");
+		f.mkdirs();
 		if(!f.exists()) {
 			try {
 				f.createNewFile();
@@ -48,6 +49,7 @@ public class TeacherDB {
 	
 	public static void setID() {
 		File f = new File("db/ID.txt");
+		f.mkdirs();
 		if(!f.exists()) {
 			try {
 				f.createNewFile();
@@ -78,6 +80,7 @@ public class TeacherDB {
 		TeacherDB.list = list;
 		Gson g = new Gson();
 		File f = new File("db/TeacherDB.txt");
+		f.mkdirs();
 		if(!f.exists()) {
 			try {
 				f.createNewFile();

@@ -56,6 +56,7 @@ public class SubjectDB {
 	public static ArrayList<SubjectData> getSubjectData() {
 		Gson g = new Gson();
 		File f = new File("db/subjectDB.txt");
+		f.mkdirs();
 		String data = "";
 
 		BufferedReader bb;
@@ -95,7 +96,7 @@ public class SubjectDB {
 		}
 	}
 	
-	public static SubjectData getTeacherData(String name) {
+	public static SubjectData getSubjectData(String name) {
 		for(SubjectData t : list) {
 			if(t.name.equalsIgnoreCase(name)) 
 				return t;

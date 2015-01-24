@@ -26,6 +26,8 @@ public class SlotDB {
 		SlotDB.list = list;
 		Gson g = new Gson();
 		File f = new File("db/slotDB.txt");
+		f.mkdirs();
+		
 		if(!f.exists()) {
 			try {
 				f.createNewFile();
@@ -106,6 +108,7 @@ public class SlotDB {
 		SlotDB.schoolName = schoolName;
 		Gson g = new Gson();
 		File f = new File("db/schoolname.txt");
+		f.mkdirs();
 		if(!f.exists()) {
 			try {
 				f.createNewFile();

@@ -18,7 +18,7 @@ public class AdminClass {
 	private ArrayList<SubjectData> subjectList;
 	private ArrayList<SlotData> slotList;
 
-	public void addTeacher(String name, ArrayList<Subject> subs) {
+	public void addTeacher(String name, ArrayList<TeacherData> subs) {
 		Subject[] subjects = subs.toArray(new Subject[subs.size()]);
 		TeacherData t = new TeacherData(name, subjects);
 		TeacherDB.addTeacher(t);
@@ -28,7 +28,7 @@ public class AdminClass {
 		TeacherDB.deleteTeacher(id);
 	}
 
-	public void updateTeacher(int id, ArrayList<Subject> subs) {
+	public void updateTeacher(int id, ArrayList<TeacherData> subs) {
 		Subject[] subjects = subs.toArray(new Subject[subs.size()]);
 		TeacherData t = TeacherDB.getTeacherData(id);
 		t.subjects = subjects;
@@ -63,17 +63,20 @@ public class AdminClass {
 	}
 
 	private void initTeacher() {
-		TeacherDB.getTeacherData();
+		teacherList = TeacherDB.getTeacherData();
 	}
 	
 	private void initSubjects() {
-
+		subjectList = SubjectDB.getSubjectData();
 	}
 	
 	private void initSlots() {
-
+		slotList = SlotDB.getSlotData();
 	}
 	
+	/*
+	 * Main functionality
+	 */
 	private void calculateTimeTable() {
 
 	}
@@ -102,10 +105,11 @@ public class AdminClass {
 		return false;
 	}
 
+	/*
+	 * Checks if the slot is available
+	 */
 	public boolean isSlotAvailable(SlotData slot) {
-		boolean teachersAvailable = isTeacherAvailable(slot);
-		boolean subjectsAvailable = isSubjectAvailable(slot);
-		return teachersAvailable & subjectsAvailable && !isSlotBreak(slot);
+		return isTeacherAvailable(slot) & isSubjectAvailable(slot) && !isSlotBreak(slot);
 	}
 
 	public void setSchoolName(String name) {
