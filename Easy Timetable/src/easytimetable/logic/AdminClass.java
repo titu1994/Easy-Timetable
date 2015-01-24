@@ -163,7 +163,7 @@ public class AdminClass {
 				slotList.add(sData);
 			}
 		}
-		TimeTable tt = new TimeTable(slotList, maxTeacher, year);
+		TimeTable tt = new TimeTable(slotList, maxTeacher, year, slotCount);
 		TimeTableDB.storeTimeTable(tt);
 	}
 
