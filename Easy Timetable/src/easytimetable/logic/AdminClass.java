@@ -22,6 +22,7 @@ public class AdminClass {
 	
 	private int slotCount;
 	private int year;
+	private int maxTeacher;
 
 	public void addTeacher(String name, ArrayList<TeacherData> subs) {
 		SubjectData[] subjects = subs.toArray(new SubjectData[subs.size()]);
@@ -92,6 +93,13 @@ public class AdminClass {
 		this.year = year;
 	}
 	
+	/*
+	 * GUI sets the max no of teachers in a room at a time.
+	 */
+	public void setMaxNoOfTeachersInClassRoom(int maxTeacher) {
+		this.maxTeacher = maxTeacher;
+	}
+	
 	public void setSlotCount(int slotCount) {
 		this.slotCount = slotCount;
 		SlotDB.storeSlotCount(slotCount);
@@ -155,7 +163,7 @@ public class AdminClass {
 				slotList.add(sData);
 			}
 		}
-		TimeTable tt = new TimeTable(slotList, year);
+		TimeTable tt = new TimeTable(slotList, maxTeacher, year);
 		TimeTableDB.storeTimeTable(tt);
 	}
 
