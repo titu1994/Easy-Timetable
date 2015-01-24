@@ -96,10 +96,9 @@ public class AdminClass {
 		return test;
 	}
 
-	public boolean isSlotBreak(SlotData slot) {
+	public boolean isSlotBreak(int no) {
 		for(int x : breakList) {
-			if(x == slot.no) {
-				slot.isBreak = true;
+			if(x == no) {
 				return true;
 			}
 		}
@@ -118,7 +117,7 @@ public class AdminClass {
 	 * Checks if the slot is available
 	 */
 	public boolean isSlotAvailable(SlotData slot) {
-		return isTeacherAvailable(slot) & isSubjectAvailable(slot) && !isSlotBreak(slot);
+		return isTeacherAvailable(slot) & isSubjectAvailable(slot) && !isSlotBreak(slot.no);
 	}
 	
 	/*
@@ -128,11 +127,24 @@ public class AdminClass {
 		SlotData sData = null;
 		for(int day = 0; day < 6; day++) {
 			for(int slot = 1; slot <= slotCount; slot++) {
+				if(isSlotBreak(slot)) {
+					sData = new SlotData(null,  null);
+					sData.isBreak = true;
+				}
+				else {
+					sData = calculateSlot(slot);
+				}
 				
+				slotList.add(sData);
 			}
 		}
 		
 		
+	}
+
+	private SlotData calculateSlot(int slotNo) {
+		
+		return null;
 	}
 
 } 
