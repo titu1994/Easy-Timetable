@@ -17,9 +17,11 @@ public class AdminClass {
 	private ArrayList<TeacherData> teacherList;
 	private ArrayList<SubjectData> subjectList;
 	private ArrayList<SlotData> slotList;
+	
+	private int slotCount;
 
 	public void addTeacher(String name, ArrayList<TeacherData> subs) {
-		Subject[] subjects = subs.toArray(new Subject[subs.size()]);
+		SubjectData[] subjects = subs.toArray(new SubjectData[subs.size()]);
 		TeacherData t = new TeacherData(name, subjects);
 		TeacherDB.addTeacher(t);
 	}
@@ -29,7 +31,7 @@ public class AdminClass {
 	}
 
 	public void updateTeacher(int id, ArrayList<TeacherData> subs) {
-		Subject[] subjects = subs.toArray(new Subject[subs.size()]);
+		SubjectData[] subjects = subs.toArray(new SubjectData[subs.size()]);
 		TeacherData t = TeacherDB.getTeacherData(id);
 		t.subjects = subjects;
 		TeacherDB.updateTeacher(t);
@@ -58,6 +60,8 @@ public class AdminClass {
 		initTeacher();
 		initSubjects();
 		initSlots();
+		
+		this.slotCount = getSlotCount();
 
 		calculateTimeTable();
 	}
@@ -74,11 +78,20 @@ public class AdminClass {
 		slotList = SlotDB.getSlotData();
 	}
 	
+	public int getSlotCount() {
+		return SlotDB.getSlotCount();
+	}
+	
+	public void setSlotCount(int slotCount) {
+		this.slotCount = slotCount;
+		SlotDB.storeSlotCount(slotCount);
+	}
+	
 	/*
 	 * Main functionality
 	 */
 	private void calculateTimeTable() {
-
+		
 	}
 
 	public boolean isTeacherAvailable(SlotData data) {

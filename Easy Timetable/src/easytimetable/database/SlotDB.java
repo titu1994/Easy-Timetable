@@ -15,7 +15,7 @@ import com.google.gson.reflect.TypeToken;
 public class SlotDB {
 
 	private static ArrayList<SlotData> list;
-	
+	private static int slotCount;
 	private static String schoolName;
 	
 	public SlotDB() {
@@ -153,5 +153,56 @@ public class SlotDB {
 		
 		schoolName = g.fromJson(data, String.class);
 		return schoolName;
+	}
+	
+	public static void storeSlotCount(int slotCount) {
+		SlotDB.slotCount = slotCount;
+		Gson g = new Gson();
+		File f = new File("db/slotcount.txt");
+		f.mkdirs();
+		if(!f.exists()) {
+			try {
+				f.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			f.delete();
+			try {
+				f.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		String data = g.toJson(list);
+		try {
+			PrintWriter pw = new PrintWriter(new FileWriter(f), true);
+			pw.println(data);
+			pw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static int getSlotCount() {
+		Gson g = new Gson();
+		File f = new File("db/slotcount.txt");
+		String data = "";
+
+		BufferedReader bb;
+		try {
+			bb = new BufferedReader(new FileReader(f));
+			data = bb.readLine();
+			bb.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		slotCount = g.fromJson(data, Integer.class);
+		return slotCount;
 	}
 }

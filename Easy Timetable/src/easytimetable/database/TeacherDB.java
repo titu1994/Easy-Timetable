@@ -10,6 +10,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javax.security.auth.Subject;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -161,5 +163,20 @@ public class TeacherDB {
 		list.remove(t);
 		list.add(t);
 		storeTeacherData(list);
+	}
+	
+	public static ArrayList<TeacherData> getTeachersWhoTeachSubject(ArrayList<TeacherData> teachers, SubjectData sub) {
+		ArrayList<TeacherData> temp = new ArrayList<TeacherData>();
+		
+		for(TeacherData t : teachers) {
+			for(SubjectData s : t.subjects) {
+				if(sub.equals(s.name)) {
+					temp.add(t);
+					break;
+				}
+			}
+		}
+		
+		return temp;
 	}
 }

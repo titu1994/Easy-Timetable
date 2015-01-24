@@ -1,17 +1,14 @@
 package easytimetable.database;
 
-import javax.security.auth.Subject;
-
-
 public class TeacherData {
 	
 	private static int id = 1;
 	public int tid;
 	public final String name;
-	public Subject[] subjects;
+	public SubjectData[] subjects;
 	public boolean isAvailable = true;
 	
-	public TeacherData(String name, Subject[] subjects) {
+	public TeacherData(String name, SubjectData[] subjects) {
 		this.tid = id++;
 		this.name = name;
 		this.subjects = subjects;
