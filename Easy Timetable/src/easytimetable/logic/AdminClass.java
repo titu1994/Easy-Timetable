@@ -57,27 +57,16 @@ public class AdminClass {
 	}
 
 	public void createTimeTable() {
-		initTeacher();
-		initSubjects();
-		initSlots();
+		teacherList = TeacherDB.getTeacherData();
+		subjectList = SubjectDB.getSubjectData();
+		slotList = SlotDB.getSlotData();
 		
 		this.slotCount = getSlotCount();
 
 		calculateTimeTable();
+		
+		
 	}
-
-	private void initTeacher() {
-		teacherList = TeacherDB.getTeacherData();
-	}
-	
-	private void initSubjects() {
-		subjectList = SubjectDB.getSubjectData();
-	}
-	
-	private void initSlots() {
-		slotList = SlotDB.getSlotData();
-	}
-	
 	public int getSlotCount() {
 		return SlotDB.getSlotCount();
 	}
