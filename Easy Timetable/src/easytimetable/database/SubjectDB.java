@@ -12,18 +12,18 @@ import java.util.ArrayList;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-public class TeacherDB {
-
-	private static ArrayList<TeacherData> list;
+public class SubjectDB {
 	
-	public TeacherDB() {
+	private static ArrayList<SubjectData> list;
+	
+	public SubjectDB() {
 		list = new ArrayList<>();
 	}
-
-	public void storeTeacherData(ArrayList<TeacherData> list) {
-		TeacherDB.list = list;
+	
+	public void storeSubjectsData(ArrayList<SubjectData> list) {
+		SubjectDB.list = list;
 		Gson g = new Gson();
-		File f = new File("db/TeacherDB.txt");
+		File f = new File("db/subjectDB.txt");
 		if(!f.exists()) {
 			try {
 				f.createNewFile();
@@ -42,16 +42,16 @@ public class TeacherDB {
 		}
 	}
 
-	public void addTeacher(TeacherData t) {
+	public void addSubject(SubjectData t) {
 		if(!list.contains(t)) {
 			list.add(t);
-			storeTeacherData(list);
+			storeSubjectsData(list);
 		}
 	}
 
-	public ArrayList<TeacherData> getTeacherData() {
+	public ArrayList<SubjectData> getTeacherData() {
 		Gson g = new Gson();
-		File f = new File("db/TeacherDB.txt");
+		File f = new File("db/subjectDB.txt");
 		String data = "";
 
 		BufferedReader bb;
@@ -65,13 +65,15 @@ public class TeacherDB {
 			e.printStackTrace();
 		}
 		
-		list = g.fromJson(data, new TypeToken<ArrayList<TeacherData>>(){}.getType());
+		list = g.fromJson(data, new TypeToken<ArrayList<SubjectData>>(){}.getType());
 		return list;
 	}
 
-	public void updateTeacher(TeacherData t) {
+	public void updateSubject(SubjectData t) {
 		list.remove(t);
 		list.add(t);
-		storeTeacherData(list);
+		storeSubjectsData(list);
 	}
+	
+
 }
