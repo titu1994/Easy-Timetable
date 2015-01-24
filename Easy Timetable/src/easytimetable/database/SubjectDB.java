@@ -52,14 +52,7 @@ public class SubjectDB {
 			e.printStackTrace();
 		}
 	}
-
-	public static void addSubject(SubjectData t) {
-		if(!list.contains(t)) {
-			list.add(t);
-			storeSubjectsData(list);
-		}
-	}
-
+	
 	public static ArrayList<SubjectData> getSubjectData() {
 		Gson g = new Gson();
 		File f = new File("db/subjectDB.txt");
@@ -78,6 +71,13 @@ public class SubjectDB {
 		
 		list = g.fromJson(data, new TypeToken<ArrayList<SubjectData>>(){}.getType());
 		return list;
+	}
+	
+	public static void addSubject(SubjectData t) {
+		if(!list.contains(t)) {
+			list.add(t);
+			storeSubjectsData(list);
+		}
 	}
 
 	public static void updateSubject(SubjectData t) {

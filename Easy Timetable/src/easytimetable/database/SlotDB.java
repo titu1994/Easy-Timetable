@@ -16,6 +16,8 @@ public class SlotDB {
 
 	private static ArrayList<SlotData> list;
 	
+	private static String schoolName;
+	
 	public SlotDB() {
 		list = new ArrayList<>();
 	}
@@ -23,7 +25,7 @@ public class SlotDB {
 	public static void storeSlot(ArrayList<SlotData> list) {
 		SlotDB.list = list;
 		Gson g = new Gson();
-		File f = new File("db/Timetable.txt");
+		File f = new File("db/slotDB.txt");
 		if(!f.exists()) {
 			try {
 				f.createNewFile();
@@ -52,7 +54,7 @@ public class SlotDB {
 	
 	public static ArrayList<SlotData> getSlotData() {
 		Gson g = new Gson();
-		File f = new File("db/Timetable.txt");
+		File f = new File("db/slotDB.txt");
 		String data = "";
 
 		BufferedReader bb;
@@ -100,4 +102,53 @@ public class SlotDB {
 		storeSlot(list);
 	}
 	
+	public static void storeSchoolName(String schoolName) {
+		SlotDB.schoolName = schoolName;
+		Gson g = new Gson();
+		File f = new File("db/schoolname.txt");
+		if(!f.exists()) {
+			try {
+				f.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			f.delete();
+			try {
+				f.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		String data = g.toJson(list);
+		try {
+			PrintWriter pw = new PrintWriter(new FileWriter(f), true);
+			pw.println(data);
+			pw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static String getSchoolName() {
+		Gson g = new Gson();
+		File f = new File("db/schoolname.txt");
+		String data = "";
+
+		BufferedReader bb;
+		try {
+			bb = new BufferedReader(new FileReader(f));
+			data = bb.readLine();
+			bb.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		schoolName = g.fromJson(data, String.class);
+		return schoolName;
+	}
 }

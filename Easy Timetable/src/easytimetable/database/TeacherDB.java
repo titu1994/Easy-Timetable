@@ -106,13 +106,6 @@ public class TeacherDB {
 		setID();
 	}
 
-	public static void addTeacher(TeacherData t) {
-		if(!list.contains(t)) {
-			list.add(t);
-			storeTeacherData(list);
-		}
-	}
-
 	public static ArrayList<TeacherData> getTeacherData() {
 		Gson g = new Gson();
 		File f = new File("db/TeacherDB.txt");
@@ -143,6 +136,14 @@ public class TeacherDB {
 		}
 		return null;
 	}
+	
+	public static void addTeacher(TeacherData t) {
+		if(!list.contains(t)) {
+			list.add(t);
+			storeTeacherData(list);
+		}
+	}
+
 	
 	public static void deleteTeacher(int id) {
 		for(TeacherData t : list) {
