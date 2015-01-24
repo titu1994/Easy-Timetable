@@ -56,31 +56,25 @@ public class AdminClass {
 		breakList = breaks;
 	}
 
+	/**
+	 * Creates the timetable
+	 */
 	public void createTimeTable() {
 		teacherList = TeacherDB.getTeacherData();
 		subjectList = SubjectDB.getSubjectData();
-		slotList = SlotDB.getSlotData();
 		
-		this.slotCount = getSlotCount();
+		slotList = SlotDB.getSlotData();
+		slotList.clear();
+		slotCount = SlotDB.getSlotCount();
 
 		calculateTimeTable();
 		
-		
-	}
-	public int getSlotCount() {
-		return SlotDB.getSlotCount();
+		SlotDB.storeSlot(slotList);
 	}
 	
 	public void setSlotCount(int slotCount) {
 		this.slotCount = slotCount;
 		SlotDB.storeSlotCount(slotCount);
-	}
-	
-	/*
-	 * Main functionality
-	 */
-	private void calculateTimeTable() {
-		
 	}
 
 	public boolean isTeacherAvailable(SlotData data) {
@@ -101,10 +95,20 @@ public class AdminClass {
 
 	public boolean isSlotBreak(SlotData slot) {
 		for(int x : breakList) {
-			if(x == slot.no)
+			if(x == slot.no) {
+				slot.isBreak = true;
 				return true;
+			}
 		}
 		return false;
+	}
+	
+	public void setSchoolName(String name) {
+		SlotDB.storeSchoolName(name);
+	}
+
+	public String getSchoolName() {
+		return SlotDB.getSchoolName();
 	}
 
 	/*
@@ -113,13 +117,16 @@ public class AdminClass {
 	public boolean isSlotAvailable(SlotData slot) {
 		return isTeacherAvailable(slot) & isSubjectAvailable(slot) && !isSlotBreak(slot);
 	}
-
-	public void setSchoolName(String name) {
-		SlotDB.storeSchoolName(name);
-	}
-
-	public String getSchoolName() {
-		return SlotDB.getSchoolName();
+	
+	/*
+	 * Main functionality
+	 */
+	private void calculateTimeTable() {
+		for(int day = 0; day < 6; day++) {
+			for(int slot = 1; slot <= slotCount; slot++) {
+				
+			}
+		}
 	}
 
 } 

@@ -2,11 +2,12 @@ package easytimetable.database;
 
 
 public class SlotData {
-	
+
+	private static int count = 1;
 	public TeacherData[] teachers;
 	public SubjectData[] subs;
-	private static int count = 1;
 	public int no;
+	public boolean isBreak;
 	
 	public SlotData(TeacherData[] teachers, SubjectData[] subs) {
 		this.teachers = teachers;
@@ -20,4 +21,13 @@ public class SlotData {
 		return teachers[0].tid == s.teachers[0].tid;
 	}
 
+	public boolean isBreak() {
+		return isBreak;
+	}
+
+	public void setBreak(boolean isBreak) {
+		this.isBreak = isBreak;
+	}
+
+	
 }
