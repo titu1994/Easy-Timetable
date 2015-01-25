@@ -6,7 +6,6 @@ public class TimeTable {
 	
 	public ArrayList<SlotData> slots;
 	public int year;
-	
 	public int maxTeacher;
 	public int slotCount;
 	public int division;

@@ -202,7 +202,7 @@ public class AdminClass {
 	 */
 	private void calculateTimeTable() {
 		SlotData sData = null;
-		for (int day = 0; day < 5; day++) {
+		for (int day = 0; day < 6; day++) {
 			for (int slot = 1; slot <= slotCount; slot++) {
 				if (isSlotBreak(slot)) {
 					sData = new SlotData(null, null);
