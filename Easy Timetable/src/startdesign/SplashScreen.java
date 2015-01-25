@@ -1,5 +1,16 @@
-package startdesign;
-import java.awt.Color;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author urmikapoor
+ */
+
+    import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -15,7 +26,7 @@ import com.jgoodies.animation.Animations;
 import com.jgoodies.animation.Animator;
 import com.jgoodies.animation.swing.animations.BasicTextAnimation;
 import com.jgoodies.animation.swing.components.BasicTextLabel;
-public class animate extends JWindow{
+public class SplashScreen extends JWindow{
 	BasicTextLabel label;
 	public void Apresentacao()
 	{
@@ -67,16 +78,12 @@ public class animate extends JWindow{
 		}
 		public static void main(String args[])
 		{
-			animate a = new animate();
+			SplashScreen a = new SplashScreen();
 			a.Apresentacao();
 			System.exit(0);
 			
 		}
 		
-		
+
+    
 }
-		
-		
-	
-
-
