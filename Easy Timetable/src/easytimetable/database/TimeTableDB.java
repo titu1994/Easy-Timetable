@@ -48,7 +48,7 @@ public class TimeTableDB {
 
 	public static TimeTable getTimeTable(int year, int division) {
 		Gson g = new Gson();
-		File f = new File("db/TimeTable " + tt.year + "" + tt.division + ".txt");
+		File f = new File("db/TimeTable " + tt.year + " " + tt.division + ".txt");
 		String data = "";
 
 		BufferedReader bb;

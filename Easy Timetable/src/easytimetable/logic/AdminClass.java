@@ -67,9 +67,9 @@ public class AdminClass {
 		this.teacherPassword = password;
 	}
 	
-	public void addTeacher(String name, ArrayList<TeacherData> subs) {
+	public void addTeacher(String name, ArrayList<TeacherData> subs, int grade) {
 		SubjectData[] subjects = subs.toArray(new SubjectData[subs.size()]);
-		TeacherData t = new TeacherData(name, subjects, teacherPassword);
+		TeacherData t = new TeacherData(name, subjects, teacherPassword, grade);
 		TeacherDB.addTeacher(t);
 	}
 
@@ -236,7 +236,6 @@ public class AdminClass {
 		int pointer = subPointer; 
 
 		for (int i = 0; i < maxTeacher; i++) {
-
 			al = TeacherDB.getTeachersWhoTeachSubject(teacherList, sublist[subPointer]);
 
 			if (al.size() == 0) {
@@ -247,7 +246,7 @@ public class AdminClass {
 			}
 
 			for (TeacherData t : al) {
-				if (t.isAvailable == true) {
+				if (t.isAvailable == true && t.grade == year) {
 					teachers[i] = t;
 					TeacherDB.availableChange(t, false);
 					break;

@@ -9,14 +9,16 @@ public class TeacherData {
 	public final String name;
 	public SubjectData[] subjects;
 	public boolean isAvailable = true;
+	public int grade;
 	
 	public String  password;
 	
-	public TeacherData(String name, SubjectData[] subjects, String password) {
+	public TeacherData(String name, SubjectData[] subjects, String password, int grade) {
 		this.tid = id++;
 		this.name = name;
 		this.subjects = subjects;
 		this.password = Arrays.toString(password.getBytes());
+		this.grade = grade;
 	}
 
 	public String getPassword() {

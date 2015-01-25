@@ -1,21 +1,18 @@
 package startdesign;
-import static javax.swing.text.html.HTML.Tag.FONT;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import java.io.FileOutputStream;
-
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import javax.swing.text.Document;
-import javax.swing.JLabel;
+import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
-import javax.swing.JTextArea;
-import javax.swing.GroupLayout;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.UIManager;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -45,7 +42,7 @@ public class AdminTT extends javax.swing.JFrame {
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
-		jTabbedPane1 = new javax.swing.JTabbedPane();
+		jTabbedPane1 = new JTabbedPane();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 

@@ -17,20 +17,15 @@ import easytimetable.database.TimeTable;
 
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class StudentPortal extends JFrame{
 	private JTextField textField;
-	
-	
-	public static void main(String args[]) {
-		StudentPortal portal = new StudentPortal();
-		portal.setVisible(true);
-	}
+	private JTextField textField_1;
 	
 	public StudentPortal() {
 		setSize(850, 450);
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setBackground(Color.WHITE);
 		
 		JPanel panel = new JPanel();
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
@@ -39,54 +34,53 @@ public class StudentPortal extends JFrame{
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(198)
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 433, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE))
+					.addContainerGap(203, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 426, GroupLayout.PREFERRED_SIZE)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(52)
-							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 245, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addGap(52)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 245, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(129, Short.MAX_VALUE))
 		);
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel_1 = new JLabel("Choose Year:");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1.setBounds(42, 42, 112, 39);
+		lblNewLabel_1.setBounds(58, 46, 112, 39);
 		panel.add(lblNewLabel_1);
 		
 		JLabel lblChooseDivision = new JLabel("Choose Division:");
 		lblChooseDivision.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblChooseDivision.setBounds(42, 109, 112, 39);
+		lblChooseDivision.setBounds(58, 113, 112, 39);
 		panel.add(lblChooseDivision);
 		
-		RandomData r = RandomDB.getRandomData();
-		int x = r.maxYear;
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(276, 53, 112, 20);
-		for(int i = 1; i < x; i++)
-			comboBox.addItem(""+x);
-		panel.add(comboBox);
-		
-		
 		JButton btnGetTimeTable = new JButton("Get Time Table");
+		btnGetTimeTable.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int selectionDivision = Integer.parseInt(textField.getText().toString());
+				int selectionYear = Integer.parseInt(textField_1.getText().toString());
+				StudentTTView.div = selectionDivision;
+				StudentTTView.year = selectionYear;
+				StudentTTView st = new StudentTTView();
+				st.setVisible(true);
+				setVisible(false);
+			}
+		});
 		btnGetTimeTable.setBounds(155, 192, 112, 42);
 		panel.add(btnGetTimeTable);
 		
 		textField = new JTextField();
-		textField.setBounds(276, 120, 112, 20);
+		textField.setBounds(276, 120, 112, 28);
 		panel.add(textField);
 		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(276, 53, 112, 28);
+		panel.add(textField_1);
+		textField_1.setColumns(10);
 		getContentPane().setLayout(groupLayout);
 		
-		int selectionYear = Integer.parseInt(comboBox.getSelectedItem().toString());
-		int selectionDivision = Integer.parseInt(textField.getText().toString());
-		
-		StudentTTView.div = selectionDivision;
-		StudentTTView.year = selectionYear;
 	}
 }

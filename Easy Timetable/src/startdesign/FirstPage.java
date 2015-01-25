@@ -1,5 +1,7 @@
 package startdesign;
 import javax.swing.ImageIcon;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 public class FirstPage extends javax.swing.JFrame {
 
     /**
@@ -29,8 +31,33 @@ public class FirstPage extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        jLabel11.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		TeacherUI ad = new TeacherUI();
+        		ad.setVisible(true);
+        		setVisible(false);
+        	}
+        });
         jLabel12 = new javax.swing.JLabel();
+        jLabel12.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent arg0) {
+        		AdminUI ad = new AdminUI();
+        		ad.setVisible(true);
+        		setVisible(false);
+        	}
+        });
         jLabel13 = new javax.swing.JLabel();
+        jLabel13.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		System.out.println("Clicked");
+        		StudentPortal ad = new StudentPortal();
+        		setVisible(false);
+        		ad.setVisible(true);
+        	}
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 

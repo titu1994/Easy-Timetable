@@ -2,6 +2,13 @@ package startdesign;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 public class TeacherUI extends javax.swing.JFrame {
 
     /**
@@ -19,7 +26,7 @@ public class TeacherUI extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
+    	setSize(500,500);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -46,7 +53,6 @@ public class TeacherUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,42 +72,54 @@ public class TeacherUI extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 255, 0));
         jLabel3.setText("Teacher");
-
-        jLabel4.setForeground(new java.awt.Color(102, 255, 51));
-        jLabel4.setIcon(new ImageIcon(TeacherUI.class.getResource("/images/background.jpg")));
+        
+        btnNewButton = new JButton("Login");
+        btnNewButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		TeacherTTView.id = Integer.parseInt(jTextField1.getText().toString());
+        		TeacherTTView v = new TeacherTTView();
+        		v.setVisible(true);
+        		setVisible(false);
+        	}
+        });
         GroupLayout groupLayout = new GroupLayout(getContentPane());
         groupLayout.setHorizontalGroup(
         	groupLayout.createParallelGroup(Alignment.LEADING)
         		.addGroup(groupLayout.createSequentialGroup()
-        			.addGap(330)
-        			.addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
-        		.addGroup(groupLayout.createSequentialGroup()
-        			.addGap(250)
-        			.addComponent(jLabel2, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
-        			.addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))
-        		.addGroup(groupLayout.createSequentialGroup()
-        			.addGap(250)
-        			.addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))
-        		.addGroup(groupLayout.createSequentialGroup()
-        			.addGap(320)
-        			.addComponent(jPasswordField1, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))
-        		.addComponent(jLabel4, GroupLayout.PREFERRED_SIZE, 740, GroupLayout.PREFERRED_SIZE)
+        			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(groupLayout.createSequentialGroup()
+        					.addGap(189)
+        					.addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(groupLayout.createSequentialGroup()
+        					.addGap(110)
+        					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+        						.addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(jLabel2, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))
+        					.addGap(18)
+        					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(jPasswordField1, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)))
+        				.addGroup(groupLayout.createSequentialGroup()
+        					.addGap(159)
+        					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)))
+        			.addContainerGap(122, Short.MAX_VALUE))
         );
         groupLayout.setVerticalGroup(
         	groupLayout.createParallelGroup(Alignment.LEADING)
         		.addGroup(groupLayout.createSequentialGroup()
-        			.addGap(320)
+        			.addGap(120)
         			.addComponent(jLabel3)
-        			.addGap(22)
+        			.addGap(9)
         			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
         				.addComponent(jLabel2)
         				.addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
-        			.addGap(20)
-        			.addComponent(jLabel1))
-        		.addGroup(groupLayout.createSequentialGroup()
-        			.addGap(410)
-        			.addComponent(jPasswordField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        		.addComponent(jLabel4, GroupLayout.PREFERRED_SIZE, 490, GroupLayout.PREFERRED_SIZE)
+        			.addGap(18)
+        			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(jLabel1)
+        				.addComponent(jPasswordField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addGap(18)
+        			.addComponent(btnNewButton)
+        			.addGap(54))
         );
         getContentPane().setLayout(groupLayout);
 
@@ -142,10 +160,7 @@ public class TeacherUI extends javax.swing.JFrame {
 private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
-    
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    // End of variables declaration//GEN-END:variables
+    private JButton btnNewButton;
 }

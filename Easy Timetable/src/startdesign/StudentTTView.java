@@ -47,16 +47,29 @@ public class StudentTTView extends JFrame{
 	}
 
 	TableModel dataModel = new AbstractTableModel() {
-		public int getColumnCount() { return 5; }
+		public int getColumnCount() { return 6; }
 		public int getRowCount() { return slotSize;}
-		
+		int startTime = 8;
 		int slotSize = SlotDB.getSlotCount();
 		TimeTable t = TimeTableDB.getTimeTable(year, div);
 		ArrayList<SlotData> slots = t.slots;
 
 		public Object getValueAt(int row, int col) { 
+			
+			if(col == 5) {
+				if(row == 3) {
+					return "Break";
+				}
+				if(row == 6)
+					return "Break";
+				
+				return "" + (startTime++);
+			}
 			StringBuffer sb = new StringBuffer();
 			SlotData slot = slots.get(row + col*slotSize);
+			if(slot.subs == null && slot.isBreak) {
+				return "Break";
+			}
 			for(SubjectData sub : slot.subs) {
 				sb.append(sub.name + ",");
 			}
