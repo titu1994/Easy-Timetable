@@ -10,16 +10,15 @@ import java.io.PrintWriter;
 
 import com.google.gson.Gson;
 
-public class TimeTableDB {
+public class AdminDB {
 	
-	private static TimeTable tt;
-
-	public static void storeTimeTable(TimeTable tt) {
-		TimeTableDB.tt = tt;
+	private static Admin admin;
+	
+	public static void storeAdminData(Admin admin) {
+		AdminDB.admin = admin;
 		Gson g = new Gson();
-		File f = new File("db/TimeTable " + tt.year + "" + tt.division + ".txt");
+		File f = new File("db/AdminDB.txt");
 		f.mkdirs();
-
 		if(!f.exists()) {
 			try {
 				f.createNewFile();
@@ -36,7 +35,7 @@ public class TimeTableDB {
 			}
 		}
 
-		String data = g.toJson(tt);
+		String data = g.toJson(admin);
 		try {
 			PrintWriter pw = new PrintWriter(new FileWriter(f), true);
 			pw.println(data);
@@ -46,9 +45,9 @@ public class TimeTableDB {
 		}
 	}
 
-	public static TimeTable getTimeTable(int year) {
+	public static Admin getAdminData() {
 		Gson g = new Gson();
-		File f = new File("db/TimeTable " + year + ".txt");
+		File f = new File("db/AdminDB.txt");
 		String data = "";
 
 		BufferedReader bb;
@@ -61,8 +60,10 @@ public class TimeTableDB {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		tt = g.fromJson(data, TimeTable.class);
-		return tt;
+		
+		admin = g.fromJson(data, Admin.class);
+		;
+		return admin;
 	}
+
 }

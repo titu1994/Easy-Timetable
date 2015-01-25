@@ -8,9 +8,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import javax.security.auth.Subject;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -157,6 +154,13 @@ public class TeacherDB {
 				storeTeacherData(list);
 			}
 		}
+	}
+	
+	public static void availableChange(TeacherData t, boolean b) {
+		t.isAvailable = b;
+		list.remove(t);
+		list.add(t);
+		storeTeacherData(list);
 	}
 	
 	public static void updateTeacher(TeacherData t) {

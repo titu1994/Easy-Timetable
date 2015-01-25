@@ -1,5 +1,7 @@
 package easytimetable.database;
 
+import java.util.Arrays;
+
 public class TeacherData {
 	
 	private static int id = 1;
@@ -8,12 +10,24 @@ public class TeacherData {
 	public SubjectData[] subjects;
 	public boolean isAvailable = true;
 	
-	public TeacherData(String name, SubjectData[] subjects) {
+	public String  password;
+	
+	public TeacherData(String name, SubjectData[] subjects, String password) {
 		this.tid = id++;
 		this.name = name;
 		this.subjects = subjects;
+		this.password = Arrays.toString(password.getBytes());
 	}
 
+	public String getPassword() {
+		String arr[] = password.split(",");
+		byte[] bytes = new byte[arr.length];
+		for(int i = 0; i < bytes.length; i++) {
+			bytes[i] = Byte.parseByte(arr[i]);
+		}
+		String pass = new String(bytes);
+		return pass;
+	}
 
 	public static void setId(int id) {
 		TeacherData.id = id;
