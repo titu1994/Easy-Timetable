@@ -1,13 +1,11 @@
+package startdesign;
+import static javax.swing.text.html.HTML.Tag.FONT;
 
-import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.FontFactory;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileOutputStream;
+
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.text.Document;
-import static javax.swing.text.html.HTML.Tag.FONT;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
