@@ -1,4 +1,5 @@
 package startdesign;
+import javax.swing.ImageIcon;
 public class FirstPage extends javax.swing.JFrame {
 
     /**
@@ -33,11 +34,11 @@ public class FirstPage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\urmikapoor\\Desktop\\admin.jpg")); // NOI18N
+        jLabel1.setIcon(new ImageIcon(FirstPage.class.getResource("/images/admin.jpg"))); // NOI18N
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\urmikapoor\\Desktop\\teacher.jpg")); // NOI18N
+        jLabel2.setIcon(new ImageIcon(FirstPage.class.getResource("/images/teacher.jpg"))); // NOI18N
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\urmikapoor\\Desktop\\student.jpg")); // NOI18N
+        jLabel3.setIcon(new ImageIcon(FirstPage.class.getResource("/images/student.jpg"))); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Impact", 0, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 255));
@@ -67,11 +68,11 @@ public class FirstPage extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(102, 102, 255));
         jLabel10.setText("be mailed or printed.");
 
-        jLabel11.setIcon(new javax.swing.ImageIcon("C:\\Users\\urmikapoor\\Desktop\\next.png")); // NOI18N
+        jLabel11.setIcon(new ImageIcon(FirstPage.class.getResource("/images/next.png"))); // NOI18N
 
-        jLabel12.setIcon(new javax.swing.ImageIcon("C:\\Users\\urmikapoor\\Desktop\\next.png")); // NOI18N
+        jLabel12.setIcon(new ImageIcon(FirstPage.class.getResource("/images/next.png"))); // NOI18N
 
-        jLabel13.setIcon(new javax.swing.ImageIcon("C:\\Users\\urmikapoor\\Desktop\\next.png")); // NOI18N
+        jLabel13.setIcon(new ImageIcon(FirstPage.class.getResource("/images/next.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
