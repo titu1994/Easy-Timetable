@@ -15,9 +15,67 @@ import com.google.gson.reflect.TypeToken;
 public class TeacherDB {
 
 	private static ArrayList<TeacherData> list;
+	public static int teacherPerSlot;
 	
 	public TeacherDB() {
 		list = new ArrayList<>();
+	}
+	
+
+	public static int getTeacherPerSlot() {
+		File f = new File("db/teacherSlot.txt");
+		f.mkdirs();
+		if(!f.exists()) {
+			try {
+				f.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		int data = 0;
+		BufferedReader bb;
+		try {
+			bb = new BufferedReader(new FileReader(f));
+			data = Integer.parseInt(bb.readLine());
+			bb.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return data;
+	}
+	
+	public static void storeTeacherPerSlot(int slot) {
+		teacherPerSlot = slot;
+		File f = new File("db/teacherSlot.txt");
+		f.mkdirs();
+		if(!f.exists()) {
+			try {
+				f.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			f.delete();
+			try {
+				f.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		int id = slot;
+		try {
+			PrintWriter pw = new PrintWriter(new FileWriter(f), true);
+			pw.println(id);
+			pw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static int getID() {
