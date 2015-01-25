@@ -16,6 +16,8 @@ import com.jgoodies.animation.Animator;
 import com.jgoodies.animation.swing.animations.BasicTextAnimation;
 import com.jgoodies.animation.swing.components.BasicTextLabel;
 public class SplashScreen extends JWindow{
+	public SplashScreen() {
+	}
 	BasicTextLabel label;
 	public void Apresentacao()
 	{

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import easytimetable.database.SlotDB;
 import easytimetable.database.SlotData;
+import easytimetable.database.SubjectData;
 import easytimetable.database.TeacherDB;
 import easytimetable.database.TeacherData;
 
@@ -28,7 +29,6 @@ public class TeacherClass {
 
 	public interface TeacherInterface {
 		void isValidTeacher(boolean isValid);
-		ArrayList<SlotData> getTeacherTT();
 	}
 	
 	public TeacherInterface inf;
@@ -49,12 +49,46 @@ public class TeacherClass {
 		}
 	}
 	
-	public void getTimetable() {
+	public ArrayList<SlotData> getTimetable() {
 		ArrayList<SlotData> dat = SlotDB.getSlotData();
 		TeacherData[] ts;
+		TeacherData teacher = null;
+		SubjectData subs[];
+		SubjectData[] tempSubs;
+		
+		ArrayList<SlotData> list = new ArrayList<>();
+		
 		for(SlotData s : dat) {
+			ts = s.teachers;
 			
+			for(TeacherData t : ts) {
+				if(t.tid == id) {
+					teacher = t;
+					break;
+				}
+				else {
+					teacher = null;
+				}
+			}
+			if(teacher == null)
+				continue;
+			
+			subs = teacher.subjects;
+			
+			for(SlotData slot : dat) {
+				tempSubs = slot.subs;
+				for(SubjectData tempTS : subs) {
+					for(SubjectData tempSub : tempSubs) {
+						if(tempTS.name.equals(tempSub.name)) {
+							list.add(slot);
+							break;
+						}
+					}
+				}
+			}
 		}
+		
+		return list;
 	}
 
 }

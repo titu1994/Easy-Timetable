@@ -1,4 +1,6 @@
 package startdesign;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 public class userlogin extends javax.swing.JFrame {
 
     /**
@@ -18,7 +20,7 @@ public class userlogin extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
+        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -46,39 +48,61 @@ public class userlogin extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
 
         jTextField1.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(51, 255, 51));
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(320, 360, 120, 30);
 
         jLabel2.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 255, 51));
         jLabel2.setText("Username:");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(250, 360, 70, 18);
 
         jLabel1.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 255, 51));
         jLabel1.setText("Password:");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(250, 410, 70, 18);
 
-        jPasswordField1.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
-        getContentPane().add(jPasswordField1);
-        jPasswordField1.setBounds(320, 410, 120, 24);
+        jPasswordField1.setFont(new java.awt.Font("Impact", 0, 14));
 
         jLabel3.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 255, 0));
         jLabel3.setText("Teacher");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(330, 320, 50, 18);
 
         jLabel4.setForeground(new java.awt.Color(102, 255, 51));
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\urmikapoor\\Desktop\\background.jpg")); // NOI18N
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(0, 0, 740, 490);
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\urmikapoor\\Desktop\\background.jpg"));
+        GroupLayout groupLayout = new GroupLayout(getContentPane());
+        groupLayout.setHorizontalGroup(
+        	groupLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(groupLayout.createSequentialGroup()
+        			.addGap(330)
+        			.addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
+        		.addGroup(groupLayout.createSequentialGroup()
+        			.addGap(250)
+        			.addComponent(jLabel2, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+        			.addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))
+        		.addGroup(groupLayout.createSequentialGroup()
+        			.addGap(250)
+        			.addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))
+        		.addGroup(groupLayout.createSequentialGroup()
+        			.addGap(320)
+        			.addComponent(jPasswordField1, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))
+        		.addComponent(jLabel4, GroupLayout.PREFERRED_SIZE, 740, GroupLayout.PREFERRED_SIZE)
+        );
+        groupLayout.setVerticalGroup(
+        	groupLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(groupLayout.createSequentialGroup()
+        			.addGap(320)
+        			.addComponent(jLabel3)
+        			.addGap(22)
+        			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        				.addComponent(jLabel2)
+        				.addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+        			.addGap(20)
+        			.addComponent(jLabel1))
+        		.addGroup(groupLayout.createSequentialGroup()
+        			.addGap(410)
+        			.addComponent(jPasswordField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        		.addComponent(jLabel4, GroupLayout.PREFERRED_SIZE, 490, GroupLayout.PREFERRED_SIZE)
+        );
+        getContentPane().setLayout(groupLayout);
 
         pack();
     }// </editor-fold>                        
