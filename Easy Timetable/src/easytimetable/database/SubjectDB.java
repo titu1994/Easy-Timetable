@@ -26,6 +26,7 @@ public class SubjectDB {
 		SubjectDB.list = list;
 		Gson g = new Gson();
 		File f = new File("db/subjectDB.txt");
+		f.mkdirs();
 		if(!f.exists()) {
 			try {
 				f.createNewFile();

@@ -53,8 +53,8 @@ public class AdminUI extends javax.swing.JFrame {
         btnNewButton.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent arg0) {
-        		
-        		if(jTextField1.getText().toString() == "123" && jPasswordField1.getText().toString() == "123")
+        		String s = new String( jPasswordField1.getPassword());
+        		if(jTextField1.getText().toString().equals("123") && s.equals("123"))
         		{
         			System.out.println("Works");
         			tt t = new tt();

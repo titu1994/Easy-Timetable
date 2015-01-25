@@ -35,7 +35,7 @@ public class tt extends JFrame{
 	private JTextField textField_9;
 	private JTextField textField_10;
 	public tt() {
-		
+		setSize(850, 450);
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		
 		JPanel panel_2 = new JPanel();
@@ -103,6 +103,9 @@ public class tt extends JFrame{
 				String s2 = textField_4.getText();
 				String s3 = textField_5.getText();
 				String s4 = textField_6.getText();
+				String pass = new String(passwordField.getPassword());
+				
+				
 			}
 		});
 		btnNewButton.setBounds(265, 56, 89, 23);
