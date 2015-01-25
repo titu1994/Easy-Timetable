@@ -2,8 +2,8 @@ package easytimetable.logic;
 
 import java.util.ArrayList;
 
-import javax.security.auth.Subject;
-
+import easytimetable.database.Admin;
+import easytimetable.database.AdminDB;
 import easytimetable.database.SlotDB;
 import easytimetable.database.SlotData;
 import easytimetable.database.SubjectDB;
@@ -19,18 +19,60 @@ public class AdminClass {
 	private ArrayList<TeacherData> teacherList;
 	private ArrayList<SubjectData> subjectList;
 	private ArrayList<SlotData> slotList;
-    
-	private int x;
+
+	private int subPointer;
 	private int slotCount;
 	private int year;
 	private int maxTeacher;
 	private int division;
 
+	private String teacherPassword;
+	private String adminUsername, adminPassword;
+
+	public interface AdminInterface {
+		public void notifyTeacherUnavailable();
+		public void notifyAdmin(boolean isValid);
+	}
+	
+	/*
+	 * GUI 
+	 */
+	public void setAdminUsername(String adminUsername) {
+		this.adminUsername = adminUsername;
+	}
+	
+	/*
+	 * GUI 
+	 */
+	public void setAdminPassword(String adminPassword) {
+		this.adminPassword = adminPassword;
+	}
+	
+	public void checkAdmin() {
+		Admin a = AdminDB.getAdminData();
+		if(a.getPassword().equals(adminPassword) && a.userName.equals(adminUsername)) {
+			if(interf != null)
+				interf.notifyAdmin(true);
+		}
+		else {
+			if(interf != null) 
+				interf.notifyAdmin(false);
+		}
+	}
+
+	/*
+	 * GUI
+	 */
+	public void setTeacherPassword(String password) {
+		this.teacherPassword = password;
+	}
+	
 	public void addTeacher(String name, ArrayList<TeacherData> subs) {
 		SubjectData[] subjects = subs.toArray(new SubjectData[subs.size()]);
-		TeacherData t = new TeacherData(name, subjects);
+		TeacherData t = new TeacherData(name, subjects, teacherPassword);
 		TeacherDB.addTeacher(t);
 	}
+
 
 	public void removeTeacher(int id) {
 		TeacherDB.deleteTeacher(id);
@@ -59,7 +101,7 @@ public class AdminClass {
 	}
 
 	/**
-	 * Break list is added from GUI here
+	 * GUI Break list is added from GUI here
 	 */
 	public void setBreakList(int... breaks) {
 		breakList = breaks;
@@ -101,7 +143,7 @@ public class AdminClass {
 	public void setMaxNoOfTeachersInClassRoom(int maxTeacher) {
 		this.maxTeacher = maxTeacher;
 	}
-	
+
 	/*
 	 * GUI sets the division
 	 */
@@ -160,7 +202,7 @@ public class AdminClass {
 	 */
 	private void calculateTimeTable() {
 		SlotData sData = null;
-		for (int day = 0; day < 5; day++) {
+		for (int day = 0; day < 6; day++) {
 			for (int slot = 1; slot <= slotCount; slot++) {
 				if (isSlotBreak(slot)) {
 					sData = new SlotData(null, null);
@@ -176,19 +218,32 @@ public class AdminClass {
 		TimeTableDB.storeTimeTable(tt);
 	}
 
+
+	
+
+	public AdminInterface interf;
+
+	public void setInterf(AdminInterface interf) {
+		this.interf = interf;
+	}
+
 	private SlotData calculateSlot(int slotNo) {
 		TeacherData teachers[] = new TeacherData[maxTeacher];
-		SubjectData subs[] = subjectList.toArray(new SubjectData[subjectList.size()]);
+		SubjectData sublist[] = subjectList.toArray(new SubjectData[subjectList.size()]);
 		ArrayList<TeacherData> al;
 		SlotData soda;
-		SubjectData[] subby = new SubjectData[maxTeacher];
-		
+		SubjectData[] subArr = new SubjectData[maxTeacher];
+		int pointer = subPointer; 
+
 		for (int i = 0; i < maxTeacher; i++) {
 
-			al = TeacherDB.getTeachersWhoTeachSubject(teacherList, subs[x]);
+			al = TeacherDB.getTeachersWhoTeachSubject(teacherList, sublist[subPointer]);
 
 			if (al.size() == 0) {
 				// Alert via GUI that teachers unavailable
+				if(interf != null) {
+					interf.notifyTeacherUnavailable();
+				}
 			}
 
 			for (TeacherData t : al) {
@@ -200,14 +255,22 @@ public class AdminClass {
 
 			}
 
-			x = (x + 1) % subs.length;
+			subPointer = (subPointer + 1) % sublist.length;
 		}
-		
-		
-		System.arraycopy(subs, x, subby, 0, maxTeacher);
-		soda = new SlotData(teachers, subby);
-		
-		
+
+
+		for(int i = 0; i < maxTeacher; i++) {
+			subArr[i] = sublist[pointer];
+			pointer = (pointer + 1) % maxTeacher;
+		}
+
+		soda = new SlotData(teachers, subArr);
+		soda.no = slotNo;
+
+		for(int i = 0; i < teachers.length; i++) {
+			TeacherDB.availableChange(teachers[i], true);
+		}
+
 		return soda;
 	}
 
