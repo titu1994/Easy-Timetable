@@ -1,12 +1,12 @@
 package startdesign;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-public class userlogin extends javax.swing.JFrame {
+public class StudentUI extends javax.swing.JFrame {
 
     /**
-     * Creates new form userlogin
+     * Creates new form userlogin2
      */
-    public userlogin() {
+    public StudentUI() {
         initComponents1();
     }
 
@@ -20,7 +20,7 @@ public class userlogin extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -36,9 +36,10 @@ public class userlogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
+     * 
      * @param args the command line arguments
      */
-      private void initComponents1() {
+    private void initComponents1() {
 
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -64,7 +65,7 @@ public class userlogin extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 255, 0));
-        jLabel3.setText("Teacher");
+        jLabel3.setText("Student");
 
         jLabel4.setForeground(new java.awt.Color(102, 255, 51));
         jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\urmikapoor\\Desktop\\background.jpg"));
@@ -72,15 +73,17 @@ public class userlogin extends javax.swing.JFrame {
         groupLayout.setHorizontalGroup(
         	groupLayout.createParallelGroup(Alignment.LEADING)
         		.addGroup(groupLayout.createSequentialGroup()
+        			.addGap(250)
+        			.addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))
+        		.addGroup(groupLayout.createSequentialGroup()
+        			.addGap(250)
+        			.addComponent(jLabel2, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))
+        		.addGroup(groupLayout.createSequentialGroup()
         			.addGap(330)
         			.addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
         		.addGroup(groupLayout.createSequentialGroup()
-        			.addGap(250)
-        			.addComponent(jLabel2, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+        			.addGap(320)
         			.addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))
-        		.addGroup(groupLayout.createSequentialGroup()
-        			.addGap(250)
-        			.addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))
         		.addGroup(groupLayout.createSequentialGroup()
         			.addGap(320)
         			.addComponent(jPasswordField1, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))
@@ -89,14 +92,17 @@ public class userlogin extends javax.swing.JFrame {
         groupLayout.setVerticalGroup(
         	groupLayout.createParallelGroup(Alignment.LEADING)
         		.addGroup(groupLayout.createSequentialGroup()
-        			.addGap(320)
-        			.addComponent(jLabel3)
-        			.addGap(22)
-        			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-        				.addComponent(jLabel2)
-        				.addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
-        			.addGap(20)
+        			.addGap(410)
         			.addComponent(jLabel1))
+        		.addGroup(groupLayout.createSequentialGroup()
+        			.addGap(360)
+        			.addComponent(jLabel2))
+        		.addGroup(groupLayout.createSequentialGroup()
+        			.addGap(320)
+        			.addComponent(jLabel3))
+        		.addGroup(groupLayout.createSequentialGroup()
+        			.addGap(360)
+        			.addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
         		.addGroup(groupLayout.createSequentialGroup()
         			.addGap(410)
         			.addComponent(jPasswordField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -105,8 +111,7 @@ public class userlogin extends javax.swing.JFrame {
         getContentPane().setLayout(groupLayout);
 
         pack();
-    }// </editor-fold>                        
-
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -121,20 +126,20 @@ public class userlogin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(userlogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StudentUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(userlogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StudentUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(userlogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StudentUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(userlogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StudentUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new userlogin().setVisible(true);
+                new StudentUI().setVisible(true);
             }
         });
     }
