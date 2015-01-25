@@ -1,6 +1,7 @@
 package startdesign;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
 public class StudentUI extends javax.swing.JFrame {
 
     /**
@@ -68,7 +69,7 @@ public class StudentUI extends javax.swing.JFrame {
         jLabel3.setText("Student");
 
         jLabel4.setForeground(new java.awt.Color(102, 255, 51));
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\urmikapoor\\Desktop\\background.jpg"));
+        jLabel4.setIcon(new ImageIcon(StudentUI.class.getResource("/images/background.jpg")));
         GroupLayout groupLayout = new GroupLayout(getContentPane());
         groupLayout.setHorizontalGroup(
         	groupLayout.createParallelGroup(Alignment.LEADING)
