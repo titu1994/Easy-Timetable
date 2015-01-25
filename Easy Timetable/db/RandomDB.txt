@@ -1,0 +1,1 @@
+{"maxYear":10,"gradePerYear":1}
