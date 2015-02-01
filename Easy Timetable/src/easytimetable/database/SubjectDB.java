@@ -76,6 +76,9 @@ public class SubjectDB {
 	}
 	
 	public static void addSubject(SubjectData t) {
+		if(list == null)
+			list = new ArrayList<>();
+		
 		if(!list.contains(t)) {
 			list.add(t);
 			storeSubjectsData(list);

@@ -19,6 +19,8 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class StudentPortal extends JFrame{
 	private JTextField textField;
@@ -56,18 +58,18 @@ public class StudentPortal extends JFrame{
 		panel.add(lblChooseDivision);
 		
 		JButton btnGetTimeTable = new JButton("Get Time Table");
-		btnGetTimeTable.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
+		btnGetTimeTable.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				int selectionDivision = Integer.parseInt(textField.getText().toString());
 				int selectionYear = Integer.parseInt(textField_1.getText().toString());
-				StudentTTView.div = selectionDivision;
-				StudentTTView.year = selectionYear;
-				StudentTTView st = new StudentTTView();
+				StudentTimeTable.div = selectionDivision;
+				StudentTimeTable.year = selectionYear;
+				StudentTimeTable st = new StudentTimeTable();
 				st.setVisible(true);
 				setVisible(false);
 			}
 		});
+		
 		btnGetTimeTable.setBounds(155, 192, 112, 42);
 		panel.add(btnGetTimeTable);
 		

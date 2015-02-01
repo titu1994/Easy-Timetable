@@ -36,7 +36,7 @@ public class TeacherTTView extends JFrame {
 		btnNewButton.setBounds(312, 11, 200, 50);
 		getContentPane().add(btnNewButton);
 
-		table = new JTable();
+		table = new JTable(dataModel);
 		table.setBounds(55, 110, 734, 291);
 		getContentPane().add(table);
 
@@ -47,7 +47,7 @@ public class TeacherTTView extends JFrame {
 		ArrayList<SlotData> slots;
 		TeacherData teacher;
 		public int getColumnCount() {
-			return 6;
+			return 5;
 		}
 
 		public int getRowCount() {
@@ -66,7 +66,7 @@ public class TeacherTTView extends JFrame {
 		public Object getValueAt(int row, int col) {
 			StringBuffer sb = new StringBuffer();
 			SlotData slot = slots.get(row + col * slotSize);
-			if (col == 5) {
+			/*if (col == 5) {
 				if (row == 3) {
 					return "Break";
 				}
@@ -74,7 +74,7 @@ public class TeacherTTView extends JFrame {
 					return "Break";
 
 				return "" + (startTime++);
-			}
+			}*/
 			if (slot.subs == null && slot.isBreak) {
 				return "Break";
 			}

@@ -19,6 +19,7 @@ public class TeacherDB {
 	
 	public TeacherDB() {
 		list = new ArrayList<>();
+		list = getTeacherData();
 	}
 	
 
@@ -190,6 +191,11 @@ public class TeacherDB {
 	}
 	
 	public static TeacherData getTeacherData(int id) {
+		if(list == null)
+			list = getTeacherData();
+		if(list == null)
+			list = new ArrayList<>();
+		
 		for(TeacherData t : list) {
 			if(t.tid == id) 
 				return t;
@@ -198,6 +204,11 @@ public class TeacherDB {
 	}
 	
 	public static void addTeacher(TeacherData t) {
+		if(list == null)
+			list = getTeacherData();
+		if(list == null)
+			list = new ArrayList<>();
+		
 		if(!list.contains(t)) {
 			list.add(t);
 			storeTeacherData(list);
@@ -206,6 +217,11 @@ public class TeacherDB {
 
 	
 	public static void deleteTeacher(int id) {
+		if(list == null)
+			list = getTeacherData();
+		if(list == null)
+			list = new ArrayList<>();
+		
 		for(TeacherData t : list) {
 			if(t.tid == id) {
 				list.remove(t);
@@ -222,6 +238,10 @@ public class TeacherDB {
 	}
 	
 	public static void updateTeacher(TeacherData t) {
+		if(list == null)
+			list = getTeacherData();
+		if(list == null)
+			list = new ArrayList<>();
 		list.remove(t);
 		list.add(t);
 		storeTeacherData(list);
@@ -232,7 +252,7 @@ public class TeacherDB {
 		
 		for(TeacherData t : teachers) {
 			for(SubjectData s : t.subjects) {
-				if(sub.equals(s.name)) {
+				if(sub.name.equals(s.name)) {
 					temp.add(t);
 					break;
 				}

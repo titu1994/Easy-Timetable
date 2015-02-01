@@ -12,9 +12,9 @@ import com.google.gson.Gson;
 
 public class AdminDB {
 	
-	private static Admin admin;
+	private static AdminData admin;
 	
-	public static void storeAdminData(Admin admin) {
+	public static void storeAdminData(AdminData admin) {
 		AdminDB.admin = admin;
 		Gson g = new Gson();
 		File f = new File("db/AdminDB.txt");
@@ -45,7 +45,7 @@ public class AdminDB {
 		}
 	}
 
-	public static Admin getAdminData() {
+	public static AdminData getAdminData() {
 		Gson g = new Gson();
 		File f = new File("db/AdminDB.txt");
 		String data = "";
@@ -61,7 +61,7 @@ public class AdminDB {
 			e.printStackTrace();
 		}
 		
-		admin = g.fromJson(data, Admin.class);
+		admin = g.fromJson(data, AdminData.class);
 		;
 		return admin;
 	}

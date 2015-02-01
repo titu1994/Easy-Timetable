@@ -1,9 +1,10 @@
 package easytimetable.logic;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
-import easytimetable.database.Admin;
 import easytimetable.database.AdminDB;
+import easytimetable.database.AdminData;
 import easytimetable.database.SlotDB;
 import easytimetable.database.SlotData;
 import easytimetable.database.SubjectDB;
@@ -33,30 +34,37 @@ public class AdminClass {
 		public void notifyTeacherUnavailable();
 		public void notifyAdmin(boolean isValid);
 	}
-	
+
 	/*
 	 * GUI 
 	 */
 	public void setAdminUsername(String adminUsername) {
 		this.adminUsername = adminUsername;
 	}
-	
+
 	/*
 	 * GUI 
 	 */
 	public void setAdminPassword(String adminPassword) {
 		this.adminPassword = adminPassword;
 	}
-	
-	public void checkAdmin() {
-		Admin a = AdminDB.getAdminData();
+
+	public void storeAdminCredentials(String name, String password) {
+		AdminData admin = new AdminData(name, password);
+		AdminDB.storeAdminData(admin);
+	}
+
+	public boolean checkAdmin() {
+		AdminData a = AdminDB.getAdminData();
 		if(a.getPassword().equals(adminPassword) && a.userName.equals(adminUsername)) {
 			if(interf != null)
 				interf.notifyAdmin(true);
+			return true;
 		}
 		else {
 			if(interf != null) 
 				interf.notifyAdmin(false);
+			return false;
 		}
 	}
 
@@ -66,7 +74,7 @@ public class AdminClass {
 	public void setTeacherPassword(String password) {
 		this.teacherPassword = password;
 	}
-	
+
 	public void addTeacher(String name, ArrayList<TeacherData> subs, int grade) {
 		SubjectData[] subjects = subs.toArray(new SubjectData[subs.size()]);
 		TeacherData t = new TeacherData(name, subjects, teacherPassword, grade);
@@ -105,6 +113,7 @@ public class AdminClass {
 	 */
 	public void setBreakList(int... breaks) {
 		breakList = breaks;
+		System.out.println("Break List : " + Arrays.toString(breaks));
 	}
 
 	/**
@@ -112,9 +121,11 @@ public class AdminClass {
 	 */
 	public void createTimeTable() {
 		teacherList = TeacherDB.getTeacherData();
+		System.out.println(teacherList);
 
-		slotList = SlotDB.getSlotData();
-		slotList.clear();
+		//slotList = SlotDB.getSlotData();
+		//slotList.clear();4
+		slotList = new ArrayList<>();
 		slotCount = SlotDB.getSlotCount();
 
 		calculateTimeTable();
@@ -150,7 +161,10 @@ public class AdminClass {
 	public void setDivisin(int division) {
 		this.division = division;
 	}
-
+	
+	/*
+	 * GUI
+	 */
 	public void setSlotCount(int slotCount) {
 		this.slotCount = slotCount;
 		SlotDB.storeSlotCount(slotCount);
@@ -203,8 +217,11 @@ public class AdminClass {
 	private void calculateTimeTable() {
 		SlotData sData = null;
 		for (int day = 0; day < 5; day++) {
-			for (int slot = 1; slot <= slotCount; slot++) {
+			System.out.println("Day : " +  day);
+			for (int slot = 0; slot < slotCount; slot++) {
+				System.out.println("Slot : " + slot);
 				if (isSlotBreak(slot)) {
+					System.out.println("Slot " + slot + " is a break");
 					sData = new SlotData(null, null);
 					sData.isBreak = true;
 				} else {
@@ -212,14 +229,13 @@ public class AdminClass {
 				}
 
 				slotList.add(sData);
+				System.out.println("Added a slot : " + slot);
 			}
 		}
 		TimeTable tt = new TimeTable(slotList, maxTeacher, year, slotCount, division);
 		TimeTableDB.storeTimeTable(tt);
 	}
 
-
-	
 
 	public AdminInterface interf;
 
@@ -231,7 +247,7 @@ public class AdminClass {
 		TeacherData teachers[] = new TeacherData[maxTeacher];
 		SubjectData sublist[] = subjectList.toArray(new SubjectData[subjectList.size()]);
 		ArrayList<TeacherData> al;
-		SlotData soda;
+		SlotData subDat;
 		SubjectData[] subArr = new SubjectData[maxTeacher];
 		int pointer = subPointer; 
 
@@ -241,9 +257,12 @@ public class AdminClass {
 			if (al.size() == 0) {
 				// Alert via GUI that teachers unavailable
 				if(interf != null) {
-					interf.notifyTeacherUnavailable();
+					//interf.notifyTeacherUnavailable();
 				}
+				continue;
 			}
+			
+			System.out.println("Teachers Subject - Size = " + al.size());
 
 			for (TeacherData t : al) {
 				if (t.isAvailable == true && t.grade == year) {
@@ -251,26 +270,28 @@ public class AdminClass {
 					TeacherDB.availableChange(t, false);
 					break;
 				}
-
+				else {
+					System.out.println("T is unavailable");
+				}
 			}
-
+			System.out.println("al size " + al.size());
+			
 			subPointer = (subPointer + 1) % sublist.length;
 		}
-
 
 		for(int i = 0; i < maxTeacher; i++) {
 			subArr[i] = sublist[pointer];
 			pointer = (pointer + 1) % maxTeacher;
 		}
 
-		soda = new SlotData(teachers, subArr);
-		soda.no = slotNo;
+		subDat = new SlotData(teachers, subArr);
+		subDat.no = slotNo;
 
 		for(int i = 0; i < teachers.length; i++) {
 			TeacherDB.availableChange(teachers[i], true);
 		}
 
-		return soda;
+		return subDat;
 	}
 
 }

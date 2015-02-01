@@ -110,6 +110,8 @@ public class SlotDB {
 	}
 
 	public static void storeSchoolName(String schoolName) {
+		System.out.println("School name : " + schoolName);
+		
 		SlotDB.schoolName = schoolName;
 		Gson g = new Gson();
 		File f = new File("db/schoolname.txt");
@@ -130,7 +132,7 @@ public class SlotDB {
 			}
 		}
 
-		String data = g.toJson(list);
+		String data = g.toJson(schoolName);
 		try {
 			PrintWriter pw = new PrintWriter(new FileWriter(f), true);
 			pw.println(data);
@@ -161,6 +163,7 @@ public class SlotDB {
 	}
 
 	public static void storeSlotCount(int slotCount) {
+		System.out.println("Stor SlotCount : " + slotCount);
 		SlotDB.slotCount = slotCount;
 		Gson g = new Gson();
 		File f = new File("db/slotcount.txt");
@@ -181,7 +184,7 @@ public class SlotDB {
 			}
 		}
 
-		String data = g.toJson(list);
+		String data = g.toJson(slotCount);
 		try {
 			PrintWriter pw = new PrintWriter(new FileWriter(f), true);
 			pw.println(data);

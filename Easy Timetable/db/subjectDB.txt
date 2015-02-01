@@ -1,1 +1,1 @@
-[{"name":"English","isAvailable":true}]
+[{"name":"Art","isAvailable":true},{"name":"Comps","isAvailable":true},{"name":"Maths","isAvailable":true},{"name":"English","isAvailable":true},{"name":"P.E.","isAvailable":true},{"name":"Science","isAvailable":true},{"name":"Biology","isAvailable":true}]

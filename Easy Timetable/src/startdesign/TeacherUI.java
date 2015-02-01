@@ -4,9 +4,15 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JLabel;
+
+import easytimetable.database.TeacherDB;
+import easytimetable.database.TeacherData;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 public class TeacherUI extends javax.swing.JFrame {
@@ -77,6 +83,9 @@ public class TeacherUI extends javax.swing.JFrame {
         btnNewButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
         		TeacherTTView.id = Integer.parseInt(jTextField1.getText().toString());
+        		TeacherData teacher = TeacherDB.getTeacherData(TeacherTTView.id);
+        		TeacherTTView.year = teacher.grade;
+        		
         		TeacherTTView v = new TeacherTTView();
         		v.setVisible(true);
         		setVisible(false);

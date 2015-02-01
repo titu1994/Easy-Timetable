@@ -24,26 +24,20 @@ public class StudentTTView extends JFrame{
 
 	public StudentTTView() {
 
-
 		setBackground(Color.GRAY);
 		setSize(850,450);
 		getContentPane().setLayout(null);
 
-		table = new JTable();
+		table = new JTable(dataModel);
 		table.setBackground(Color.WHITE);
 		table.setBounds(42, 394, 748, -336);
+		table.setVisible(true);
 		getContentPane().add(table);
 
 		JButton btnBack = new JButton("Back");
 		btnBack.setBounds(372, 11, 89, 23);
 		getContentPane().add(btnBack);
-
-
-
-		table = new JTable(dataModel);
 		JScrollPane scrollpane = new JScrollPane(table);
-
-
 	}
 
 	TableModel dataModel = new AbstractTableModel() {

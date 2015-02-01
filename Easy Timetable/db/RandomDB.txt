@@ -1,1 +1,1 @@
-{"maxYear":10,"gradePerYear":1}
+{"maxYear":10,"gradePerYear":1,"breakTimes":[1]}

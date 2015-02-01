@@ -22,10 +22,12 @@ public class TeacherData {
 	}
 
 	public String getPassword() {
+		password = password.replace("[", "");
+		password = password.replace("]", "");
 		String arr[] = password.split(",");
 		byte[] bytes = new byte[arr.length];
 		for(int i = 0; i < bytes.length; i++) {
-			bytes[i] = Byte.parseByte(arr[i]);
+			bytes[i] = Byte.parseByte(arr[i].trim());
 		}
 		String pass = new String(bytes);
 		return pass;
@@ -42,7 +44,8 @@ public class TeacherData {
 	@Override
 	public boolean equals(Object obj) {
 		TeacherData t = (TeacherData) obj;
-		return this.tid == t.tid;
+		return this.name.equals(t.name) && this.grade == t.grade && this.isAvailable == t.isAvailable &&
+				getPassword().equals(t.getPassword());
 	}
 
 	public boolean isAvailable() {
@@ -53,4 +56,8 @@ public class TeacherData {
 		this.isAvailable = isAvailable;
 	}
 
+	@Override
+	public String toString() {
+		return name + " : " + Arrays.toString(subjects);
+	}
 }
